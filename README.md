@@ -38,6 +38,13 @@ $ docker run --rm -d -p 3128:3128 hinata/nginx-forward-proxy:latest
 $ curl -x http://127.0.0.1:3128 https://www.google.co.jp
 ```
 
+Preferably to add the following statement to the OS cron jobs to execute the restart_nginx.py script every 15 minutes, and visualize some log messages from restar_nginx_logs.txt:
+
+```
+*/15 * * * * /usr/bin/env python3 /home/ubuntu/nginx-forward-proxy/restart_nginx.py >> /home/ubuntu/nginx-forward-proxy/restar_nginx_logs.txt
+```
+
+
 ## See also
 
 - https://github.com/chobits/ngx_http_proxy_connect_module
