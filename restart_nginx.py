@@ -4,7 +4,7 @@ import subprocess
 import re
 
 docker_image = 'reservamos/nginx-forward-proxy:latest'
-pattern = '/dev/xvda1(\s+[0-9.]+G){3}\s+(\d+)%'
+pattern = '/dev/xvda1(\s+[0-9.]+G){3}\s+(\d+)%\s\/'
 
 # Inspect hard disk usage.
 process = subprocess.Popen(['df', '-h'],
