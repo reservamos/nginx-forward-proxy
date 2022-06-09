@@ -6,6 +6,7 @@ import datetime
 
 docker_image = 'reservamos/nginx-forward-proxy:latest'
 pattern = '/dev/xvda1(\s+[0-9.]+G){3}\s+(\d+)%\s\/'
+HARD_DISK_USAGE_PERCENTAGE_LIMIT = 80
 
 # Inspect hard disk usage.
 process = subprocess.Popen(['df', '-h'],
@@ -17,7 +18,7 @@ stdout, stderr = process.communicate()
 matches = re.search(pattern, stdout)
 hard_disk_use_percentage = int(matches.group(2))
 
-if hard_disk_use_percentage < 80:
+if hard_disk_use_percentage < HARD_DISK_USAGE_PERCENTAGE_LIMIT:
     exit()
 
 # Get all docker container ids.
