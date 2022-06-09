@@ -34,4 +34,4 @@ process = subprocess.Popen(['docker', 'run', '--rm', '-d', '-p', '80:3128', 'res
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
 stdout, stderr = process.communicate()
-print(stderr)
+print(stdout, stderr)
