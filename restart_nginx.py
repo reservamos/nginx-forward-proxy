@@ -2,6 +2,7 @@
 
 import subprocess
 import re
+import datetime
 
 docker_image = 'reservamos/nginx-forward-proxy:latest'
 pattern = '/dev/xvda1(\s+[0-9.]+G){3}\s+(\d+)%\s\/'
@@ -43,3 +44,5 @@ process = subprocess.Popen(['docker', 'run', '--rm', '-d', '-p', '80:3128', dock
                             universal_newlines=True)
 stdout, stderr = process.communicate()
 print(stdout, stderr)
+
+print('Nginx restart done on {}'.format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
