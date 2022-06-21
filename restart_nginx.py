@@ -7,6 +7,7 @@ import datetime
 docker_image = 'reservamos/nginx-forward-proxy:latest'
 pattern = '/dev/xvda1(\s+[0-9.]+G){3}\s+(\d+)%\s\/'
 HARD_DISK_USAGE_PERCENTAGE_LIMIT = 80
+exposed_port = 9501
 
 # Inspect hard disk usage.
 process = subprocess.Popen(['df', '-h'],
@@ -39,7 +40,7 @@ for docker_process_id in docker_process_ids:
     print(stdout, stderr)
 
 # Initialize nginx-forward-proxy container.
-process = subprocess.Popen(['docker', 'run', '--rm', '-d', '-p', '80:3128', docker_image],
+process = subprocess.Popen(['docker', 'run', '--rm', '-d', '-p', '{}:3128'.format(exposed_port), docker_image],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
