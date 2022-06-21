@@ -28,7 +28,6 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo docker run --rm -d -p 80:3128 hinata/nginx-forward-proxy:latest
 ```
 
 ## How to use
@@ -49,7 +48,7 @@ sudo docker build -t reservamos/nginx-forward-proxy --build-arg DEFAULT_USER="us
 Run Reservamos container with:
 
 ```
-sudo docker run --rm -d -p 80:3128 reservamos/nginx-forward-proxy:latest
+sudo docker run --rm -d -p 9501:3128 reservamos/nginx-forward-proxy:latest
 ```
 
 Preferably to add the following statement to the OS cron jobs to execute the restart_nginx.py script every 15 minutes, and visualize some log messages from restar_nginx_logs.txt:
