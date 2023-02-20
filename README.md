@@ -90,8 +90,7 @@ echo "ingresando al proyecto proxy"
 cd nginx-forward-proxy
 
 echo "docker build a reservamos nginx-forward-proxy"
-sudo docker build -t reservamos/nginx-forward-proxy --build-arg DEFAULT_USER="user" --buil>
-
+sudo docker build -t reservamos/nginx-forward-proxy --build-arg DEFAULT_USER="<INSERT_USER>" --build-arg DEFAULT_PASSWORD="<INSERT_PASSWORD>" .
 echo "docker run a nginx-forward-proxy"
 sudo docker run --rm -d -p 9501:3128 reservamos/nginx-forward-proxy:latest
 ```
