@@ -80,6 +80,10 @@ Preferably to add the following statement to the OS cron jobs to execute the res
 
 <img src="https://user-images.githubusercontent.com/99829334/220213160-34670b14-034b-4212-ba69-e54e159d6104.png">
 
+- Por temas de seguridad, se cambiaron las reglas para que el puerto sea el 9501
+
+<img src="https://user-images.githubusercontent.com/99829334/220214007-4df152f8-021d-4a68-acf5-0be65ba37158.png">
+
 - Cloné el proyecto dentro de la instancia y luego ejecuté el reservamos usage y al parecer ya está funcionando bien! (Aun falta crear un startup script, porque se desconfigura cada que reiniciamos el server)
 
 <img src="https://user-images.githubusercontent.com/99829334/220213257-d67e1bf2-7c5e-4a15-b1ef-543758555aae.png">
