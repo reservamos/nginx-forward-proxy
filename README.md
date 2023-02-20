@@ -61,15 +61,29 @@ Preferably to add the following statement to the OS cron jobs to execute the res
 
 - Acceder a AWS y buscar Lightsail
 - Crear una instancia de LightSail
-- You are creating this instance in Ohio, Zone A (us-east-2a)
+
+<img src="https://user-images.githubusercontent.com/99829334/220213067-9d20b112-98af-4b23-87c8-8a7e1af010bb.png">
+
 - En select a platform linux/unix
 - Select a blueprint OS only con Ubuntu 20.04
 - Se seleccionó el plan de 3.5 USD al mes
 - El name fue saas-proxy
+
+<img src="https://user-images.githubusercontent.com/99829334/220213101-1e97e057-e8b5-4a8f-836c-620e85761b3b.png">
+
 - Luego: crear instancia
 - Al crear la instancia, le di Connect using ssh, el cual abre una pestaña para ejecutar los comandos que están en el read me del proyecto, desde la instalación hasta el reservamos usage, pero el de instalar Docker solo es la primera vez, los otros serían cada que se reinicie el server.
+
+<img src="https://user-images.githubusercontent.com/99829334/220212818-30ec6218-e725-46ae-9acd-de27105a84ea.png">
+
 - Configurar la instancia con IP estática, para que aunque se reinicie el server, continúe con la misma IP
+
+<img src="https://user-images.githubusercontent.com/99829334/220213160-34670b14-034b-4212-ba69-e54e159d6104.png">
+
 - Cloné el proyecto dentro de la instancia y luego ejecuté el reservamos usage y al parecer ya está funcionando bien! (Aun falta crear un startup script, porque se desconfigura cada que reiniciamos el server)
+
+<img src="https://user-images.githubusercontent.com/99829334/220213257-d67e1bf2-7c5e-4a15-b1ef-543758555aae.png">
+
 - Crear un script startup (https://www.youtube.com/watch?v=-aKb-k8B8xo) en el server que ejecute el sh
 
 ```
