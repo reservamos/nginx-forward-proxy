@@ -57,6 +57,59 @@ Preferably to add the following statement to the OS cron jobs to execute the res
 */15 * * * * /usr/bin/env python3 /home/ubuntu/nginx-forward-proxy/restart_nginx.py >> /home/ubuntu/nginx-forward-proxy/restart_nginx_logs.txt
 ```
 
+## Deploy on AWS Lightsail
+
+- Acceder a AWS y buscar Lightsail
+- Crear una instancia de LightSail
+- You are creating this instance in Ohio, Zone A (us-east-2a)
+- En select a platform linux/unix
+- Select a blueprint OS only con Ubuntu 20.04
+- Se seleccionó el plan de 3.5 USD al mes
+- El name fue saas-proxy
+- Luego: crear instancia
+- Al crear la instancia, le di Connect using ssh, el cual abre una pestaña para ejecutar los comandos que están en el read me del proyecto, desde la instalación hasta el reservamos usage, pero el de instalar Docker solo es la primera vez, los otros serían cada que se reinicie el server.
+- Configurar la instancia con IP estática, para que aunque se reinicie el server, continúe con la misma IP
+- Cloné el proyecto dentro de la instancia y luego ejecuté el reservamos usage y al parecer ya está funcionando bien! (Aun falta crear un startup script, porque se desconfigura cada que reiniciamos el server)
+- Crear un script startup (https://www.youtube.com/watch?v=-aKb-k8B8xo) en el server que ejecute el sh
+
+```
+[Unit]
+Description=Startup script
+
+[Service]
+ExecStart=/bin/bash /home/ubuntu/StartScript.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- Creé el sh (https://platzi.com/tutoriales/1468-bash-shell/9694-como-crear-un-shell-script-en-linuxunix/?utm_source=google&utm_medium=cpc&utm_campaign=19643931773&utm_adgroup=&utm_content=&gclid=Cj0KCQiAorKfBhC0ARIsAHDzsltAzRH3G9xmNRcji-WjhbxmacraIzrGgI8knxC9i-74UBPF6-ubI_0aAhAeEALw_wcB&gclsrc=aw.ds):
+
+```
+echo "ingresando al proyecto proxy"
+cd nginx-forward-proxy
+
+echo "docker build a reservamos nginx-forward-proxy"
+sudo docker build -t reservamos/nginx-forward-proxy --build-arg DEFAULT_USER="user" --buil>
+
+echo "docker run a nginx-forward-proxy"
+sudo docker run --rm -d -p 9501:3128 reservamos/nginx-forward-proxy:latest
+```
+
+Y reiniciamos el server, una vez reiniciado si está todo Ok, al correr el siguiente comando desde nuestra terminal:
+
+curl -x http://#{Poner IP estática}:9501 https://www.google.co.jp
+
+Nos debe de devolver un resultado correcto.
+
+## Some Docker commands
+```
+sudo docker ps -a
+sudo docker logs -f 3e81e49039ff
+
+sudo systemctl stop docker
+sudo systemctl start docker
+```
 
 ## See also
 
