@@ -102,6 +102,7 @@ curl -x http://#{Poner IP estática}:9501 https://www.google.co.jp
 Nos debe de devolver un resultado correcto.
 
 ## Some Docker commands
+
 ```
 sudo docker ps -a
 sudo docker logs -f 3e81e49039ff
