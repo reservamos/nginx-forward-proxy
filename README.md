@@ -59,36 +59,36 @@ Preferably to add the following statement to the OS cron jobs to execute the res
 
 ## Deploy on AWS Lightsail
 
-- Acceder a AWS y buscar Lightsail
-- Crear una instancia de LightSail
+- Access AWS and search for Lightsail
+- Create a LightSail instance
 
 <img src="https://user-images.githubusercontent.com/99829334/220213067-9d20b112-98af-4b23-87c8-8a7e1af010bb.png">
 
-- En select a platform linux/unix
-- Select a blueprint OS only con Ubuntu 20.04
-- Se seleccionó el plan de 3.5 USD al mes
-- El name fue saas-proxy
+- Select Linux/Unix platform
+- Select OS only blueprint with Ubuntu 20.04
+- Selected the 3.5 USD per month plan
+- The name was saas-proxy
 
 <img src="https://user-images.githubusercontent.com/99829334/220213101-1e97e057-e8b5-4a8f-836c-620e85761b3b.png">
 
-- Luego: crear instancia
-- Al crear la instancia, le di Connect using ssh, el cual abre una pestaña para ejecutar los comandos que están en el read me del proyecto, desde la instalación hasta el reservamos usage, pero el de instalar Docker solo es la primera vez, los otros serían cada que se reinicie el server.
+- Then: create instance
+- When creating the instance, I selected Connect using ssh, which opens a tab to execute the commands in the project's readme, from installation to reserved usage, but the Docker installation is only done the first time, the others would be every time the server is restarted.
 
 <img src="https://user-images.githubusercontent.com/99829334/220212818-30ec6218-e725-46ae-9acd-de27105a84ea.png">
 
-- Configurar la instancia con IP estática, para que aunque se reinicie el server, continúe con la misma IP
+- Configure the instance with a static IP, so that even if the server is restarted, it continues with the same IP.
 
 <img src="https://user-images.githubusercontent.com/99829334/220213160-34670b14-034b-4212-ba69-e54e159d6104.png">
 
-- Por temas de seguridad, se cambiaron las reglas para que el puerto sea el 9501
+- For security reasons, the rules were changed so that the port is 9501.
 
 <img src="https://user-images.githubusercontent.com/99829334/220214007-4df152f8-021d-4a68-acf5-0be65ba37158.png">
 
-- Cloné el proyecto dentro de la instancia y luego ejecuté el reservamos usage y al parecer ya está funcionando bien! (Aun falta crear un startup script, porque se desconfigura cada que reiniciamos el server)
+- I cloned the project inside the instance and then executed the reserved usage command, and it seems to be working fine! (Still need to create a startup script because it gets misconfigured every time the server is restarted).
 
 <img src="https://user-images.githubusercontent.com/99829334/220213257-d67e1bf2-7c5e-4a15-b1ef-543758555aae.png">
 
-- Crear un script startup (https://www.youtube.com/watch?v=-aKb-k8B8xo) en el server que ejecute el sh
+- Create a startup script (https://www.youtube.com/watch?v=-aKb-k8B8xo) on the server that executes the sh:
 
 ```
 [Unit]
@@ -101,23 +101,21 @@ ExecStart=/bin/bash /home/ubuntu/StartScript.sh
 WantedBy=multi-user.target
 ```
 
-- Creé el sh (https://platzi.com/tutoriales/1468-bash-shell/9694-como-crear-un-shell-script-en-linuxunix/?utm_source=google&utm_medium=cpc&utm_campaign=19643931773&utm_adgroup=&utm_content=&gclid=Cj0KCQiAorKfBhC0ARIsAHDzsltAzRH3G9xmNRcji-WjhbxmacraIzrGgI8knxC9i-74UBPF6-ubI_0aAhAeEALw_wcB&gclsrc=aw.ds):
+- Create ssh (https://platzi.com/tutoriales/1468-bash-shell/9694-como-crear-un-shell-script-en-linuxunix/?utm_source=google&utm_medium=cpc&utm_campaign=19643931773&utm_adgroup=&utm_content=&gclid=Cj0KCQiAorKfBhC0ARIsAHDzsltAzRH3G9xmNRcji-WjhbxmacraIzrGgI8knxC9i-74UBPF6-ubI_0aAhAeEALw_wcB&gclsrc=aw.ds):
 
 ```
-echo "ingresando al proyecto proxy"
 cd nginx-forward-proxy
-
-echo "docker build a reservamos nginx-forward-proxy"
 sudo docker build -t reservamos/nginx-forward-proxy --build-arg DEFAULT_USER="<INSERT_USER>" --build-arg DEFAULT_PASSWORD="<INSERT_PASSWORD>" .
-echo "docker run a nginx-forward-proxy"
 sudo docker run --rm -d -p 9501:3128 reservamos/nginx-forward-proxy:latest
 ```
 
-Y reiniciamos el server, una vez reiniciado si está todo Ok, al correr el siguiente comando desde nuestra terminal:
+Restart server and run the next command on the terminal
 
+```
 curl -x http://#{Poner IP estática}:9501 https://www.google.co.jp
+```
 
-Nos debe de devolver un resultado correcto.
+Should return a correct result.
 
 ## Some Docker commands
 
